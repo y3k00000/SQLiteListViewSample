@@ -37,6 +37,10 @@ public class DataListViewAdapter extends BaseAdapter {
         return textView;
     }
 
+    /**
+     * 實作這個function，直接把塞進新資料、更新綁定的ListView的動作一氣呵成。
+     * @param newDatas 新的資料，設計成直接取代舊的那筆。
+     */
     public void refreshDatas(ArrayList<Data> newDatas){
         DataListViewAdapter.this.currentDatas.clear();
         DataListViewAdapter.this.currentDatas.addAll(newDatas);

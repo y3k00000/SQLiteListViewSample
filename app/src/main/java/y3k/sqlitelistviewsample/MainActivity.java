@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         MainActivity.this.dataSQLite = new DataSQLite(MainActivity.this);
         MainActivity.this.dataListViewAdapter = new DataListViewAdapter();
+        // ADD Button點擊會新增一筆隨機資料並把列表更新。
         findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.refreshListViewWithDatabaseDatas();
             }
         });
+        // CLEAR Button點擊會清除資料庫中的資料並把列表更新。
         findViewById(R.id.clear_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         ((ListView)findViewById(R.id.list_view)).setAdapter(MainActivity.this.dataListViewAdapter);
     }
 
+    /**
+     * 這種可以被包裹成一個步驟的動作，就要寫成這樣的一個function，方便很多也少記很多事情。(抽象化)
+     * 當然名稱不一定要這麼囉嗦，但是建議要三個月內看到都可以反射性的知道是幹嘛為標準。
+     */
     void refreshListViewWithDatabaseDatas(){
         ArrayList<Data> currentDatas = MainActivity.this.dataSQLite.getAllDatas();
         MainActivity.this.dataListViewAdapter.refreshDatas(currentDatas);
